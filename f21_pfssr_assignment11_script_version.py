@@ -46,23 +46,38 @@ descriptiveMAPS2017 = MAPS_2017[['PK_Enrollment', 'K_Enrollment', '1_Enrollment'
 
 #
 # f) Commit your changes and push to GitHub!
-#
-# # Problem 1 code here (can split into multiple code chunks if you want)
-#
-# ​
-#
-# # starter code for 1c -- replace school_data w/ your dataframe name
-#
-#school_data.columns = school_data.columns.str.replace(' ', '_') # notice this replaces the 1st argument w/ the 2nd
-#
+
+# Ok, I see the change on my GitHub page now!
+
+
+
 # Problem 2
 #
 # a) Remove the District Code column.
+MAPS_2017_noDC = MAPS_2017.drop('District_Code',1) # This drops just the district code column - https://stackoverflow.com/questions/13411544/delete-a-column-from-a-pandas-dataframe 
+print('No district column:\n',MAPS_2017_noDC) 
 #
 # b) Create a new column called "TOTAL_Enrollment" that is the sum of all columns that end in "Enrollment".
-#
+
+# Below, I'm just creating a dataframe that only has the enrollment columns.
+MAPS_2017_noDC_byColumn = MAPS_2017_noDC[['PK_Enrollment', 'K_Enrollment', '1_Enrollment', '2_Enrollment','3_Enrollment','4_Enrollment', '5_Enrollment', '6_Enrollment', '7_Enrollment', '8_Enrollment', '9_Enrollment', '10_Enrollment', '11_Enrollment', '12_Enrollment', 'SP_Enrollment']]
+# Below, I add a new colum to the MAPS_2017_noDC dataframe that sums the enrollment from each grade to find the total enrollment in the district.
+MAPS_2017_noDC['Total_Enrollment'] = MAPS_2017_noDC_byColumn.sum(axis=1)
+print(MAPS_2017_noDC)
 # c) Compute the mean of "TOTAL_Enrollment" for each District. (Hint: groupby)
-#
+
+# I have two interpretations of this problem. The first interpretation was that I thought this meant to calculate
+# the mean enrollment of all the Massachusetts districts included in the data set:
+
+mean_totalE = MAPS_2017_noDC['Total_Enrollment'].mean() # Calculates the mean total enrollment from all districts.
+print(mean_totalE) # Mean is 512.492208490059.
+
+# My other interpretation was that this question is asking about the mean enrollment of each grade from each district:
+## --> Note that I didn't use groupby here because I already made a dataframe with just the enrollment columns by grade.
+MAPS_2017_noDC['Mean_Enrollment_by_Grade'] = MAPS_2017_noDC_byColumn.mean(axis=1) # For each district, finds the mean enrollment across all grades.
+                                                                                    # I could have also divided the Total_Enrollment row by 15.
+print(MAPS_2017_noDC)
+
 # d) Commit your changes and push to GitHub!
 #
 # # Problem 2 code here (can split into multiple code chunks if you want)
