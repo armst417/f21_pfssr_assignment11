@@ -79,21 +79,62 @@ MAPS_2017_noDC['Mean_Enrollment_by_Grade'] = MAPS_2017_noDC_byColumn.mean(axis=1
 print(MAPS_2017_noDC)
 
 # d) Commit your changes and push to GitHub!
-#
-# # Problem 2 code here (can split into multiple code chunks if you want)
-#
+
+# Did it! :)
+
+
 # Problem 3
 #
 # a) Visualize each bivariate relationship among Average_Class_Size, Average_Salary, Perc_Economically_Disadvantaged, and Perc_English_Language_Learner. Use the Seaborn function pairplot. The argument to pairplot should be school_data[['Average_Class_Size', 'Average_Salary', 'Perc_Economically_Disadvantaged', 'Perc_English_Language_Learner']], which will just pull those columns out from the full data frame.
-#
+import seaborn as sns
+MAPS_2017_dataForGraph = MAPS_2017[['Average_Class_Size', 'Average_Salary', 'Perc_Economically_Disadvantaged', 'Perc_English_Language_Learner']]
+print(MAPS_2017_dataForGraph)
+
+plot_MAPS_2017 = sns.pairplot(MAPS_2017_dataForGraph)
+plot_MAPS_2017.savefig("MAPS_2017_PairPlot.png")
+plot_MAPS_2017.fig.clf()
 # b) Describe what you see from the plots.
-#
+
+# The data along the diagonal from the upper left to the lower right corner is itself against itself looks to instead create histograms?
+# This would make sense since we are only graphing 1 numerical column instead of two against one another.
+# If my assumption here is correct, I see that the average class size is approximately normal/bell-shaped. 
+# Furthermore, it looks like average salary in a district is multimodal. Likely, there are some highly paid admin.
+# The distribution for the % economically disadvantaged is skewed right, meaning more schools have a lower percent of 
+# economically disadvantaged students.
+# The % English language learners looks to be highly skewed right, meaning fewer schools have a very high % of 
+# economically disadvantaged students.
+
+# All of my scatterplots just have clusters of data and it is difficult in my diagrams to discern
+# specific patterns. It looks like there might be a weak relationship between % ELL and % economically disadvantaged.
+
+
 # c) Based on your observations from 3b, and as a completely post-hoc, exploratory analysis, choose one of the 4 measures from 3a to be an outcome variable, and a second measure to be a predictor variable. Then run a linear regression, print the summary, and write a sentence interpreting the results (does not need to be detailed, just practice retrieving the relevant info on predictor significance, etc.)
-#
+
+# Again the data from my pairplot() was difficult to discern any clear linear relationships.
+
+# However, I think % English language learners vs. % economically disadvantaged might show a weak linear relationship.
+MAPS_2017_LinearReg = sns.regplot(x="Perc_English_Language_Learner", y="Perc_Economically_Disadvantaged", data=MAPS_2017)
+MAPS_2017_LinearReg.set_title("Percent English Language Learner vs. Percent Economically Disadvantaged")
+MAPS_2017_LinearReg.get_figure().savefig("MAPS_2017_LinearReg.png")
+MAPS_2017_LinearReg.clear()
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+import statsmodels.formula.api as smf
+lm = smf.ols(formula = "Perc_English_Language_Learner ~ Perc_Economically_Disadvantaged", data = MAPS_2017).fit()
+summary_lm = lm.summary()
+print(summary_lm)
+
+# We see the R^2 value is 0.367, indicating a weak positive relationship between % ELL and % economically disadvantaged.
+# This also means that approximately 36.7% of the variation in % economically disadvantaged can be explained by %ELL.
+# Although this is not a reliable predictor based on this very weak, positive relationship, the equation of the line
+# suggests that for every 1 percent increase in % ELL, there is, on average, an approximate 0.3561% increase in % economically
+# disadvantaged.   
+
 # d) Commit your changes and push to GitHub!
-#
-# # Problem 3 code here (can split into multiple code chunks if you want)
-#
+
+
+
+# 
 # Problem 4
 #
 # a) Create a new linear regression model that takes the model from 3c and adds both of the remaining variables from 3a as additional predictor variables. To do this, the formula interface would look like "outcome_name ~ predictor1_name + predictor2_name + predictor3_name"
