@@ -27,12 +27,23 @@
 # a) Import any helpful libraries
 #
 # b) Load the MA_Public_Schools_2017.csv file as a pandas data frame. Note: these data are from Kaggle: https://www.kaggle.com/ndalziel/massachusetts-public-schools-data and I have already removed a lot of columns.
-#
+import pandas as pd # Importing that pandas package so that I can 
+MAPS_2017 = pd.read_csv('MA_Public_Schools_2017.csv')
 # c) Adapt the example code in the chunk below to replace all spaces in column names with underscores. This is good practice in order to not cause problems with functions that don't allow spaces in variable names (e.g., smf.ols).
-#
+
+# starter code for 1c -- replace school_data w/ your dataframe name
+MAPS_2017.columns = MAPS_2017.columns.str.replace(' ', '_') # notice this replaces the 1st argument w/ the 2nd
+
 # d) Adapt the code from 1c to replace "%" sign with "Perc", because it is also good practice not to start column names with symbols.
-#
+
+MAPS_2017.columns = MAPS_2017.columns.str.replace('%', 'Perc') # replaces % with Perc
+
 # e) Find the descriptives for numeric columns.
+
+print('Descriptive stats for several: \n', MAPS_2017[['PK_Enrollment', 'K_Enrollment', '1_Enrollment', '2_Enrollment','3_Enrollment','4_Enrollment', '5_Enrollment', '6_Enrollment', '7_Enrollment', '8_Enrollment', '9_Enrollment', '10_Enrollment', '11_Enrollment', '12_Enrollment', 'SP_Enrollment', 'Perc_First_Language_Not_English', 'Perc_English_Language_Learner', 'Perc_Students_With_Disabilities', 'Perc_High_Needs', 'Perc_Economically_Disadvantaged', 'Perc_African_American', 'Perc_Asian', 'Perc_Hispanic', 'Perc_White',	'Perc_Native_American', 'Perc_Native_Hawaiian,_Pacific_Islander', 'Perc_Multi-Race,_Non-Hispanic', 'Perc_Males', 'Perc_Females', 'Average_Class_Size', 'Number_of_Students', 'Salary_Totals', 'Average_Salary', 'FTE_Count', 'In-District_Expenditures', 'Total_In-district_FTEs', 'Average_In-District_Expenditures_per_Pupil', 'Total_Expenditures', 'Total_Pupil_FTEs', 'Average_Expenditures_per_Pupil']].describe())
+
+descriptiveMAPS2017 = MAPS_2017[['PK_Enrollment', 'K_Enrollment', '1_Enrollment', '2_Enrollment','3_Enrollment','4_Enrollment', '5_Enrollment', '6_Enrollment', '7_Enrollment', '8_Enrollment', '9_Enrollment', '10_Enrollment', '11_Enrollment', '12_Enrollment', 'SP_Enrollment', 'Perc_First_Language_Not_English', 'Perc_English_Language_Learner', 'Perc_Students_With_Disabilities', 'Perc_High_Needs', 'Perc_Economically_Disadvantaged', 'Perc_African_American', 'Perc_Asian', 'Perc_Hispanic', 'Perc_White',	'Perc_Native_American', 'Perc_Native_Hawaiian,_Pacific_Islander', 'Perc_Multi-Race,_Non-Hispanic', 'Perc_Males', 'Perc_Females', 'Average_Class_Size', 'Number_of_Students', 'Salary_Totals', 'Average_Salary', 'FTE_Count', 'In-District_Expenditures', 'Total_In-district_FTEs', 'Average_In-District_Expenditures_per_Pupil', 'Total_Expenditures', 'Total_Pupil_FTEs', 'Average_Expenditures_per_Pupil']].describe()
+
 #
 # f) Commit your changes and push to GitHub!
 #
@@ -42,7 +53,7 @@
 #
 # # starter code for 1c -- replace school_data w/ your dataframe name
 #
-school_data.columns = school_data.columns.str.replace(' ', '_') # notice this replaces the 1st argument w/ the 2nd
+#school_data.columns = school_data.columns.str.replace(' ', '_') # notice this replaces the 1st argument w/ the 2nd
 #
 # Problem 2
 #
