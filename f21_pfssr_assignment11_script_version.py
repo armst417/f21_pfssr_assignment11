@@ -187,13 +187,14 @@ summary_lm3 = lm3.summary() # Saving the summary of lm3
 print(summary_lm3) # Printing the summary to my terminal
 
 # School_Type contains categorical data instead of numeric data. I noticed the variable School_Type[T.Public School] has all the same information listed as
-# the row titled Intercept. Since it is instead categorical and not something we graph, I think it just repeats the intercept information but will not be taken into
-# account in the linear regression model equation in the same way (i.e., the 47.7140 does not mean it is a coefficient in front of the school type variable). 
+# the row titled Intercept (in the part of the summary where all the predictor variables are listed). 
+# Since School_Type is  categorical and not something we graph on a scatterplot, I think it just repeats the intercept information; however, unlike the other predictor variables, 
+# when creating the multiple linear regression equation, we do not use the 47.7140 in the School_Type row as a coefficient in front of the school type variable. 
 # Also, since the variable is titled School_Type[T.Public School], I wonder how I can obtain the charter school information, since I am assuming this is a multiple regression
 # model just for public schools?
 
 # d) Commit your changes and push to GitHub!
-#
+# Done!
 
 
 
